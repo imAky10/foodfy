@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+    <section>
+        <br/>
+        <div class="slider">
+            <img src="/images/chef.png" alt="">
+            <h1>The Best Recipes</h1>
+            <p>Learn how to build the best dishes with recipes created by professionals all over the world.</p>
+        </div>
+    </section>
+
+    <section>
+        <main>
+            <br/>
+            <div>
+                <h1>Most Accessed</h1>
+            </div>
+            <br/>
+
+            <div class="cards-index">
+
+            <% for(let i=0; i<detail.length; i++) { %>
+            
+                <div class="card" id="<%= detail[i]._id %>">
+                    <div>
+                        <img src="/images/<%= detail[i].recipeImage %>" alt="">
+                    </div>
+                    <div>
+                        <h2><%= detail[i].recipeName %></h2>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <p><%= detail[i].author %></p>
+                            <a href="/recipes/<%= detail[i].id %>" class="link">View Recipe</a>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+            
+            </div>
+        </main>
+    </section>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <div class="modal-content"></div>
+            <a href="">Close modal</a>
+        </div>
+    </div>
+
+<%- include('partials/footer') %>

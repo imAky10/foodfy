@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<section>
+    <br />
+    <div class="form-style-5">
+        <form action="/add" method="POST" autocomplete="off" enctype="multipart/form-data">
+            <fieldset>
+                <legend>
+                    <h3>Add Recipe</h3>
+                </legend>
+                <br />
+                <input type="text" name="recipeName" placeholder="Recipe Name *" required>
+                <input type="text" name="author" placeholder="Author Name *" required>
+                <textarea name="ingredients" placeholder="Ingredients list separated by ; *" required></textarea>
+                <textarea name="preparation" placeholder="Preparation Steps separated with ; *" required></textarea>
+                <input type="text" name="additional" placeholder="Additional Information">
+
+                <div class="upload-btn-wrapper">
+                    <button class="btn">Upload Recipe Picture</button>
+                    <input type="file" name="imageFile" accept="image/png, image/jpeg, image/jpg" />
+                </div>
+
+
+
+            </fieldset>
+            <br /><br />
+
+            <input type="submit" value="Add Recipe" />
+        </form>
+    </div>
+    <br />
+</section>
+
+<%- include('partials/footer') %>

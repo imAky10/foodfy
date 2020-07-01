@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<section>
+    <div class="recipes">
+
+        <div class="recipes-card" id="<%= recipe._id %>">
+            <div>
+                <img src="/images/<%= recipe.recipeImage %>" alt="">
+            </div>
+
+            <div>
+                <h2><%= recipe.recipeName %></h2>
+                <p><%= recipe.author %></p>
+            </div>
+
+
+
+            <div>
+                <div class="ingredients">
+                    <div class="recipes-title">
+                        <h3>Ingredients</h3>
+                        <button class="btn-ingredients">Hide</button>
+                    </div>
+                    <div class="ingredient-list">
+                        <ul>
+                            <% for(let i=0; i<recipe.ingredients.length; i++) { %>
+                            <li><%= recipe.ingredients[i] %></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="preparation">
+                    <div class="recipes-title">
+                        <h3>Preparation</h3>
+                        <button class="btn-preparation">Show</button>
+                    </div>
+                    <div class="preparation-list hide">
+                        <ul>
+                            <% for(let i=0; i<recipe.preparation.length; i++) { %>
+                            <li><%= recipe.preparation[i] %></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="information">
+                    <div class="recipes-title">
+                        <h3>Additional Information</h3>
+                        <button class="btn-information">Hide</button>
+                    </div>
+                    <div class="p-information">
+                        <p><%= recipe.additional %></p>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<%- include('partials/footer') %>
