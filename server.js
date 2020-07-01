@@ -9,7 +9,8 @@ const Recipe = require("./models/recipe");
 const app = express();
 
 mongoose.connect(
-  process.env.MONGO_URI, {
+  process.env.MONGO_URI,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -106,7 +107,51 @@ app.post("/add", (req, res) => {
   });
 });
 
+app.get("/recipes/edit/:id", (req, res) => {
+  var id = req.params.id;
+  Recipe.findById(id, (error, recipe) => {
+    if (error) {
+      console.log("Couldn't find recipe with that id:");
+    } else {
+      res.render("edit", {
+        recipeName: recipe.recipeName,
+        author: recipe.author,
+        additional: recipe.additional,
+        id: id,
+      });
+    }
+  });
+});
 
+app.post("/recipes/edit/:id", (req, res) => {
+  var id = req.params.id;
+  var data = req.body;
+
+  Recipe.findByIdAndUpdate(
+    id,
+    {
+      recipeName: data.recipeName,
+      author: data.author,
+      additional: data.additional,
+    },
+    (err, recipe) => {
+      if (err) console.log(err);
+      else {
+        res.redirect("/recipe-list");
+      }
+    }
+  );
+});
+
+app.get("/delete/:id", (req, res) => {
+  var id = req.params.id;
+  Recipe.findByIdAndDelete(id, (err, recipe) => {
+    if (err) console.log(err);
+    else {
+      res.redirect("/recipe-list");
+    }
+  });
+});
 
 const port = process.env.PORT;
 

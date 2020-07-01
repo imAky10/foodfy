@@ -13,7 +13,10 @@
                 <p><%= recipe.author %></p>
             </div>
 
-
+            <div style="display: flex; flex-direction: row; justify-content: center;">
+                <a href="/recipes/edit/<%= recipe._id %>" class="edit-link">Edit Recipe</a>
+                <a href="/delete/<%= recipe._id %>" class="delete-link">Delete Recipe</a>
+            </div>
 
             <div>
                 <div class="ingredients">
