@@ -6,11 +6,12 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config();
 const Recipe = require("./models/recipe");
 
+// App Initialization
 const app = express();
 
+// DB Connection
 mongoose.connect(
-  process.env.MONGO_URI,
-  {
+  process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -20,6 +21,8 @@ mongoose.connect(
   }
 );
 
+
+// Middlewares
 app.use(
   bodyParser.urlencoded({
     extended: false,
@@ -33,6 +36,8 @@ app.use(fileUpload());
 
 app.use(express.static("public"));
 
+
+// Routes
 app.get("/", (req, res) => {
   Recipe.find({}, (err, detail) => {
     if (err) console.log(err);
@@ -44,9 +49,11 @@ app.get("/", (req, res) => {
   });
 });
 
+
 app.get("/about", (req, res) => {
   res.render("about");
 });
+
 
 app.get("/recipe-list", (req, res) => {
   Recipe.find({}, (err, detail) => {
@@ -58,6 +65,7 @@ app.get("/recipe-list", (req, res) => {
     _id: -1,
   });
 });
+
 
 app.get("/recipes/:id", (req, res) => {
   var id = req.params.id;
@@ -73,9 +81,11 @@ app.get("/recipes/:id", (req, res) => {
   });
 });
 
+
 app.get("/add", (req, res) => {
   res.render("add");
 });
+
 
 app.post("/add", (req, res) => {
   var data = req.body;
@@ -107,6 +117,7 @@ app.post("/add", (req, res) => {
   });
 });
 
+
 app.get("/recipes/edit/:id", (req, res) => {
   var id = req.params.id;
   Recipe.findById(id, (error, recipe) => {
@@ -123,13 +134,13 @@ app.get("/recipes/edit/:id", (req, res) => {
   });
 });
 
+
 app.post("/recipes/edit/:id", (req, res) => {
   var id = req.params.id;
   var data = req.body;
 
   Recipe.findByIdAndUpdate(
-    id,
-    {
+    id, {
       recipeName: data.recipeName,
       author: data.author,
       additional: data.additional,
@@ -143,6 +154,7 @@ app.post("/recipes/edit/:id", (req, res) => {
   );
 });
 
+
 app.get("/delete/:id", (req, res) => {
   var id = req.params.id;
   Recipe.findByIdAndDelete(id, (err, recipe) => {
@@ -153,6 +165,27 @@ app.get("/delete/:id", (req, res) => {
   });
 });
 
+
+app.get("/search", (req, res) => {
+  var data = req.query.searchRecipe
+  Recipe.find({
+    recipeName: {
+      $regex: data,
+      $options: "i"
+    }
+  }, (err, recipe) => {
+    if (err) console.log(err)
+    else {
+      res.render("search", {
+        recipe
+      })
+    }
+  })
+})
+
+
+
+// Server running
 const port = process.env.PORT;
 
 app.listen(port, () => {

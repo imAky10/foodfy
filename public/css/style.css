@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
@@ -529,4 +530,140 @@ main h1 {
 
 .delete-link:hover {
   color: black;
+}
+
+
+/* search bar styling ------------------------------- */
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+input#search {
+  font-size: 15px;
+  padding: 8px 8px 8px 4px;
+  display: block;
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+input#search:focus {
+  outline: none;
+}
+
+label.search {
+  color: #999;
+  font-size: 15px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+input#search:focus~label.search,
+input#search:valid~label.search {
+  top: -20px;
+  font-size: 12px;
+  color: #5264AE;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 200px;
+}
+
+.bar::before,
+.bar::after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar::before {
+  left: 50%;
+}
+
+.bar::after {
+  right: 50%;
+}
+
+input#search:focus~.bar::before,
+input#search:focus~.bar::after {
+  width: 50%;
+}
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+input#search:focus~.highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+@keyframes inputHighlighter {
+  from {
+    background: #5264AE;
+  }
+
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+div.not-found {
+  width: 500px;
+  left: 245px;
+  position: relative;
+  margin: auto;
+}
+
+h2.not-found-text {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 27px;
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
