@@ -1,26 +1,30 @@
 const express = require("express");
-const ejs = require("ejs");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+const passport = require("passport");
+const flash = require("connect-flash");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 require("dotenv").config();
-const Recipe = require("./models/recipe");
+require("./config/passport")(passport);
 
 // App Initialization
 const app = express();
 
 // DB Connection
 mongoose.connect(
-  process.env.MONGO_URI, {
+  process.env.MONGO_URI,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   },
   () => {
     console.log("Connected to db");
   }
 );
-
 
 // Middlewares
 app.use(
@@ -31,161 +35,50 @@ app.use(
 
 app.use(bodyParser.json());
 
+// view engine
 app.set("view engine", "ejs");
+
+// session
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
+
+// File Upload
 app.use(fileUpload());
 
+// Static files
 app.use(express.static("public"));
 
-
 // Routes
-app.get("/", (req, res) => {
-  Recipe.find({}, (err, detail) => {
-    if (err) console.log(err);
-    res.render("index", {
-      detail,
-    });
-  }).sort({
-    _id: -1,
-  });
-});
+app.use("/", require("./routes/recipe"));
+app.use("/user", require("./routes/user"));
 
-
-app.get("/about", (req, res) => {
-  res.render("about");
-});
-
-
-app.get("/recipe-list", (req, res) => {
-  Recipe.find({}, (err, detail) => {
-    if (err) console.log(err);
-    res.render("recipe_list", {
-      detail,
-    });
-  }).sort({
-    _id: -1,
-  });
-});
-
-
-app.get("/recipes/:id", (req, res) => {
-  var id = req.params.id;
-
-  Recipe.findById(id, (error, recipe) => {
-    if (error) {
-      console.log("Couldn't find recipe with that id:");
-    } else {
-      res.render("recipes", {
-        recipe,
-      });
-    }
-  });
-});
-
-
-app.get("/add", (req, res) => {
-  res.render("add");
-});
-
-
-app.post("/add", (req, res) => {
-  var data = req.body;
-
-  var imageFile = req.files.imageFile;
-  console.log(imageFile);
-
-  imageFile.mv("public/images/" + imageFile.name, (error) => {
-    if (error) {
-      console.log("Couldn't upload the image file");
-      console.log(error);
-    } else {
-      console.log("Image file succesfully uploaded.");
-    }
-  });
-
-  var recipe = new Recipe({
-    recipeName: data.recipeName,
-    author: data.author,
-    ingredients: data.ingredients.split(";"),
-    preparation: data.preparation.split(";"),
-    additional: data.additional,
-    recipeImage: imageFile.name,
-  });
-
-  recipe.save((err, detail) => {
-    if (err) console.log(err);
-    res.redirect("/recipe-list");
-  });
-});
-
-
-app.get("/recipes/edit/:id", (req, res) => {
-  var id = req.params.id;
-  Recipe.findById(id, (error, recipe) => {
-    if (error) {
-      console.log("Couldn't find recipe with that id:");
-    } else {
-      res.render("edit", {
-        recipeName: recipe.recipeName,
-        author: recipe.author,
-        additional: recipe.additional,
-        id: id,
-      });
-    }
-  });
-});
-
-
-app.post("/recipes/edit/:id", (req, res) => {
-  var id = req.params.id;
-  var data = req.body;
-
-  Recipe.findByIdAndUpdate(
-    id, {
-      recipeName: data.recipeName,
-      author: data.author,
-      additional: data.additional,
-    },
-    (err, recipe) => {
-      if (err) console.log(err);
-      else {
-        res.redirect("/recipe-list");
-      }
-    }
-  );
-});
-
-
-app.get("/delete/:id", (req, res) => {
-  var id = req.params.id;
-  Recipe.findByIdAndDelete(id, (err, recipe) => {
-    if (err) console.log(err);
-    else {
-      res.redirect("/recipe-list");
-    }
-  });
-});
-
-
-app.get("/search", (req, res) => {
-  var data = req.query.searchRecipe
-  Recipe.find({
-    recipeName: {
-      $regex: data,
-      $options: "i"
-    }
-  }, (err, recipe) => {
-    if (err) console.log(err)
-    else {
-      res.render("search", {
-        recipe
-      })
-    }
-  })
-})
-
-
-
-// Server running
+// Server
 const port = process.env.PORT;
 
 app.listen(port, () => {

@@ -1,33 +1,66 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Foodfy</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <title>Foodfy</title>
+  <link
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+  />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-    <section>
-        <header>
-            <div class="logo">
-                <a href="/"><img src="/images/logo.png" alt="logo"></a>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/recipe-list">Recipes</a></li>
-                    <li><a href="/add">Add Recipe</a></li>
-                    <li style="margin-left: 170px;">
-                        <form action="/search" method="GET" autocomplete="off">
-                            <div class="group">
-                                <input type="text" name="searchRecipe" id="search" required>
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label class="search">Search</label>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </header>
-    </section>
+  <section>
+    <header>
+      <div class="logo">
+        <a href="/"><img src="/images/logo.png" alt="logo" /></a>
+      </div>
+      <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/recipe-list">My Recipes</a></li>
+            <% if (user) { %>
+            <li><a href="/add">Add Recipe</a></li>
+  
+            <li class="account">
+              <a href=""
+                ><i class="fa fa-user"></i><%= user.name.split(" ")[0] %><i class="fa fa-angle-down"></i></a
+              >
+              <ul>
+                <li class="profile"><a href="/user/profile">Profile</a></li>
+                <li class="logout"><a href=/user/logout>Logout</a></li>
+              </ul>
+            </li>
+  
+            <% } else { %>
+            <li><a href="/user/register">Register</a></li>
+            <li><a href="/user/login">Login</a></li>
+            <% } %> 
+            <li>
+              <form action="/search" method="GET" autocomplete="off">
+                <div class="input-field">
+                  <input
+                    id="search"
+                    type="text"
+                    name="searchRecipe"
+                    class="validate"
+                  />
+                  <label for="search">Search</label>
+                </div>
+              </form>
+            </li>
+          </ul>
+      </div>
+    </header>
+  </section>
+</body>

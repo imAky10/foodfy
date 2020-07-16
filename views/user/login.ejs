@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+<section>
+  <br />
+  <div class="form-style-5">
+    <%- include('../partials/messages') %>
+
+    <form
+      action="/user/login"
+      method="POST"
+      autocomplete="off"
+      enctype="multipart/form-data"
+    >
+      <h4>Login</h4>
+      <div class="input-field">
+        <input id="email" type="email" name="email" />
+        <label for="email">Email</label>
+      </div>
+
+      <div class="input-field">
+        <input id="password" type="password" name="password" />
+        <label for="password">Password</label>
+      </div>
+      <br />
+
+      <div class="center-align">
+        <button
+          class="btn waves-effect blue waves-light btn-large"
+          type="submit"
+          name="action"
+        >
+          Login
+        </button>
+      </div>
+      <br />
+      <p class="register">No Account ? <a href="/user/register">Register</a></p>
+    </form>
+  </div>
+  <br />
+</section>
+
+<%- include('../partials/footer') %>

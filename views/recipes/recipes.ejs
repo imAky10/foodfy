@@ -1,6 +1,8 @@
-<%- include('partials/header') %>
+<%- include('../partials/header') %>
 
 <section>
+    <br /><br />
+
     <div class="recipes">
 
         <div class="recipes-card" id="<%= recipe._id %>">
@@ -10,14 +12,16 @@
 
             <div>
                 <h2><%= recipe.recipeName %></h2>
-                <p><%= recipe.author %></p>
+                <p>Posted by : <%= recipe.user.name %></p>
             </div>
-
+            <% if(user) { %>
+            <% if(user.id == recipe.user.id) { %>
             <div style="display: flex; flex-direction: row; justify-content: center;">
                 <a href="/recipes/edit/<%= recipe._id %>" class="edit-link">Edit Recipe</a>
                 <a href="/delete/<%= recipe._id %>" class="delete-link">Delete Recipe</a>
             </div>
-
+            <% } %>
+            <% } %>
             <div>
                 <div class="ingredients">
                     <div class="recipes-title">
@@ -25,9 +29,9 @@
                         <button class="btn-ingredients">Hide</button>
                     </div>
                     <div class="ingredient-list">
-                        <ul>
+                        <ul class="fa-ul">
                             <% for(let i=0; i<recipe.ingredients.length; i++) { %>
-                            <li><%= recipe.ingredients[i] %></li>
+                            <li class="list"><i class="fa-li fa fa-circle"></i><%= recipe.ingredients[i] %></li>
                             <% } %>
                         </ul>
                     </div>
@@ -39,9 +43,9 @@
                         <button class="btn-preparation">Show</button>
                     </div>
                     <div class="preparation-list hide">
-                        <ul>
+                        <ul class="fa-ul">
                             <% for(let i=0; i<recipe.preparation.length; i++) { %>
-                            <li><%= recipe.preparation[i] %></li>
+                            <li class="list"><i class="fa-li fa fa-circle"></i><%= recipe.preparation[i] %></li>
                             <% } %>
                         </ul>
                     </div>
@@ -59,4 +63,4 @@
             </div>
 </section>
 
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>

@@ -1,0 +1,30 @@
+<%- include('../partials/header') %>
+
+<section>
+  <br /><br />
+
+  <div class="cards-recipes">
+    <% recipes.map((recipe) => { %>
+    <div class="card" id="<%= recipe._id %>">
+      <div class="card-image">
+        <img src="/images/<%= recipe.recipeImage %>" alt="" />
+
+        <a
+          class="btn-floating halfway-fab waves-effect waves-light red pulse"
+          href="/recipes/<%= recipe.id %>"
+          ><i class="fa fa-search-plus"></i
+        ></a>
+      </div>
+      <div class="card-content">
+        <h6 class="card-title"><%= recipe.recipeName %></h6>
+        <p>
+          <%= recipe.user.name %>
+        </p>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <br /><br />
+</section>
+
+<%- include('../partials/footer') %>

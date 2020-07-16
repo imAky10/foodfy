@@ -1,0 +1,59 @@
+<% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
+<div class="card-alert card orange lighten-5">
+  <div class="card-content orange-text">
+    <%= error.msg %>
+  </div>
+  <button
+    type="button"
+    class="close orange-text"
+    data-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<% }); %> <% } %> <% if(success_msg != ''){ %>
+<div class="card-alert card green lighten-5">
+  <div class="card-content green-text">
+    <%= success_msg %>
+  </div>
+  <button
+    type="button"
+    class="close green-text"
+    data-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<% } %> <% if(error_msg != ''){ %>
+
+<div class="card-alert card red lighten-5">
+  <div class="card-content red-text">
+    <%= error_msg %>
+  </div>
+  <button
+    type="button"
+    class="close red-text"
+    data-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+
+<% } %> <% if(error != ''){ %>
+<div class="card-alert card red lighten-5">
+  <div class="card-content red-text">
+    <%= error %>
+  </div>
+  <button
+    type="button"
+    class="close red-text"
+    data-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<% } %>

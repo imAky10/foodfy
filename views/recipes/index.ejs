@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+
+<section>
+  <br />
+  <div class="slider">
+    <img src="/images/chef.png" alt="" />
+    <h1>The Best Recipes</h1>
+    <p>
+      Learn how to build the best dishes with recipes created by professionals
+      all over the world.
+    </p>
+  </div>
+</section>
+
+<section>
+  <main>
+    <br />
+    <% if(recipes.length>0) { %>
+    <div>
+      <h1>All Recipes</h1>
+    </div>
+    <% } else { %>
+    <div>
+      <h5>There are no recipes to show.</h5>
+    </div>
+    <% } %>
+    <br />
+
+    <div class="cards-index">
+      <% recipes.forEach((recipe) => { %>
+
+      <div class="card" id="<%= recipe._id %>">
+        <div class="card-image">
+          <img src="/images/<%= recipe.recipeImage %>" alt="" />
+
+          <a
+            class="btn-floating halfway-fab waves-effect waves-light red pulse"
+            href="/recipes/<%= recipe.id %>"
+            ><i class="fa fa-search-plus"></i
+          ></a>
+        </div>
+        <div class="card-content">
+          <h6 class="card-title"><%= recipe.recipeName %></h6>
+          <p>
+            <%= recipe.user.name %>
+          </p>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </main>
+  <br /><br />
+</section>
+
+
+<%- include('../partials/footer') %>

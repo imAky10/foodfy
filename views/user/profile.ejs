@@ -1,0 +1,65 @@
+<%- include('../partials/header') %>
+
+<section>
+  <br />
+  <%- include('../partials/profileSlider') %>
+  <br />
+</section>
+<br />
+<section>
+  <div class="row">
+    <div class="col s4">
+      <h5>User Info</h5>
+      <br />
+      <p><i class="material-icons left">person</i><%= user.name %></p>
+      <br />
+      <p><i class="material-icons left">email</i><%= user.email %></p>
+      <br />
+      <p>
+        <a
+          href="/user/settings"
+          class="waves-effect waves-light deep-purple darken-4 btn"
+          ><i class="material-icons left">settings</i>Settings</a
+        >
+      </p>
+    </div>
+    <div class="col s8">
+      <h5>Here are your recipes</h5>
+      <% if (recipes.length>0) { %>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Recipe Name</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% recipes.map((recipe)=>{ %>
+          <tr>
+            <td>
+              <a href="/recipes/<%= recipe.id %>"><%= recipe.recipeName %></a>
+            </td>
+            <td>
+              <%= moment(recipe.createdAt).format('MMMM Do YYYY, hh:mm:ss a') %>
+            </td>
+            <td>
+              <a href="/recipes/edit/<%= recipe._id %>" class="btn btn-float">
+                <i class="material-icons">edit</i>
+              </a>
+
+              <a href="/delete/<%= recipe._id %>" class="btn red">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
+          </tr>
+          <% }) } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<br />
+
+<%- include('../partials/footer') %>
