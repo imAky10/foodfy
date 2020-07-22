@@ -2,64 +2,71 @@
 
 <section>
   <br />
-  <div class="form-style-5">
-    <%- include('../partials/messages') %>
+  <div class="row">
+    <div class="col s5">
+      <img class="add-image" src="/images/reg.jpg" alt="chef image" />
+    </div>
+    <div class="col s7">
+      <div class="form-style-5 register-page">
+        <%- include('../partials/messages') %>
 
-    <form action="/user/register" method="POST" autocomplete="off">
-      <h4>Register</h4>
-      <div class="input-field">
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value="<%= typeof name != 'undefined' ? name : '' %>"
-        />
-        <label for="name">Name</label>
-      </div>
+        <form action="/user/register" method="POST" autocomplete="off">
+          <h4>Register</h4>
+          <div class="input-field">
+            <input
+              id="name"
+              type="text"
+              name="name"
+              value="<%= typeof name != 'undefined' ? name : '' %>"
+            />
+            <label for="name">Name</label>
+          </div>
 
-      <div class="input-field">
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value="<%= typeof email != 'undefined' ? email : '' %>"
-        />
-        <label for="email">Email</label>
-      </div>
+          <div class="input-field">
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+            <label for="email">Email</label>
+          </div>
 
-      <div class="input-field">
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value="<%= typeof password != 'undefined' ? password : '' %>"
-        />
-        <label for="password">Password</label>
-      </div>
+          <div class="input-field">
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value="<%= typeof password != 'undefined' ? password : '' %>"
+            />
+            <label for="password">Password</label>
+          </div>
 
-      <div class="input-field">
-        <input
-          id="password2"
-          type="password"
-          name="password2"
-          value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-        />
-        <label for="password2">Confirm Password</label>
-      </div>
-      <br />
+          <div class="input-field">
+            <input
+              id="password2"
+              type="password"
+              name="password2"
+              value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+            />
+            <label for="password2">Confirm Password</label>
+          </div>
+          <br />
 
-      <div class="center-align">
-        <button
-          class="btn waves-effect blue waves-light btn-large"
-          type="submit"
-          name="action"
-        >
-          Register
-        </button>
+          <div class="center-align">
+            <button
+              class="btn waves-effect blue waves-light btn-large"
+              type="submit"
+              name="action"
+            >
+              Register
+            </button>
+          </div>
+          <br />
+          <p class="login">Have An Account ? <a href="/user/login">Login</a></p>
+        </form>
       </div>
-      <br />
-      <p class="login">Have An Account ? <a href="/user/login">Login</a></p>
-    </form>
+    </div>
   </div>
   <br />
 </section>

@@ -137,12 +137,11 @@ main h1 {
 }
 
 .recipes img {
-  width: 900px;
-  height: 300px;
+  width: 100%;
+  height: 30%;
   border-radius: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 45px;
 }
 
 .recipes h2 {
@@ -171,7 +170,7 @@ main h1 {
   line-height: 28px;
   color: var(--color-black);
   float: left;
-  margin-left: 45px;
+  margin-left: 20px;
   margin-top: 20px;
 }
 
@@ -183,7 +182,7 @@ main h1 {
   background-color: transparent;
   padding: 5px;
   margin-top: 23px;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .recipes li.list {
@@ -191,7 +190,8 @@ main h1 {
   line-height: 28px;
   color: #444444;
   list-style-position: inside !important;
-  margin-left: 35px;
+  margin-left: 20px;
+  text-align: justify;
 }
 
 .information p {
@@ -200,7 +200,7 @@ main h1 {
   color: #444444;
   text-align: justify;
   margin-bottom: 50px;
-  margin-left: 45px;
+  margin-left: 20px;
 }
 
 .ingredients {
@@ -222,17 +222,6 @@ main h1 {
   color: #999999;
   text-align: center;
   padding: 23px 0px 23px;
-}
-
-.form-style-5 {
-  max-width: 600px;
-  padding: 10px 20px;
-  background: #fffafa;
-  margin: 10px auto;
-  padding: 20px;
-  text-align: justify;
-  border-radius: 8px;
-  font-family: "Roboto", sans-serif;
 }
 
 .form-style-5 h4 {
@@ -505,20 +494,20 @@ li.account:hover li.logout {
   text-align: justify;
 }
 
-.card-content {
+.content {
   height: 90px !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between;
 }
 
-.card-content h6 {
+.content h6 {
   margin-top: -10px !important;
   font-size: 20px !important;
   font-weight: bold !important;
 }
 
-.card-content p {
+.content p {
   margin-top: 30px !important;
   font-size: 16px !important;
 }
@@ -540,4 +529,103 @@ i.fa-angle-down {
 
 i.fa-user {
   padding-right: 10px !important;
+}
+
+.form-update {
+  max-width: 600px;
+  padding: 10px 20px;
+  background: #fffafa;
+  margin: 10px auto;
+  padding: 20px;
+  text-align: justify;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+}
+
+.add-image {
+  width: 450px;
+  height: 450px;
+  margin: auto;
+  margin-top: 60px;
+}
+
+.add-page-image {
+  width: 350px;
+  height: 350px;
+  margin-top: 90px;
+  margin-left: 20px;
+}
+
+.add-edit-image {
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+}
+
+.add-page,
+.register-page {
+  max-width: 450px;
+  padding: 10px 20px;
+  background: #fffafa;
+  margin: 10px auto;
+  padding: 20px;
+  text-align: justify;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+  margin-right: 10px;
+}
+
+.add-page {
+  max-width: 500px !important;
+}
+
+.edit-page,
+.login-page {
+  max-width: 450px;
+  padding: 10px 20px;
+  background: #fffafa;
+  margin: 10px auto;
+  padding: 20px;
+  text-align: justify;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+  margin-left: 30px;
+}
+
+.avatar img {
+  width: 100px;
+  height: 100px;
+}
+
+.avatar {
+  position: relative;
+}
+
+.avatar a {
+  position: absolute;
+  top: 50px;
+  left: 30px;
+  z-index: 33;
+  display: none;
+}
+
+.avatar:hover > a {
+  display: block;
+}
+
+.modal {
+  width: 400px;
+}
+
+.img-small {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.card-action a {
+  margin-right: 0 !important;
 }

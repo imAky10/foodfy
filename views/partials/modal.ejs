@@ -1,0 +1,28 @@
+<!-- Modal Structure -->
+<div id="add-modal" class="modal">
+    <div class="modal-content">
+        <h5 class="center-align">Add your Foodfy avatar...</h5>
+        <br />
+        <p class="orange-text">* The avatar you choose for yourself, the same avatar will be applied to other foodfy
+            users
+            also.</p>
+
+        <br />
+        <form action="/user/profile" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+                <div class="btn purple">
+                    <span>File</span>
+                    <input type="file" name="imageFile" />
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" value="<%= avatar.avatarImage %>" />
+                </div>
+            </div>
+            <div class="center-align">
+                <button class="btn waves-effect purple waves-light modal-close" type="submit">
+                    Add Avatar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

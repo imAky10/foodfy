@@ -2,70 +2,77 @@
 
 <section>
   <br />
-  <div class="form-style-5">
-    <form
-      action="/add"
-      method="POST"
-      autocomplete="off"
-      enctype="multipart/form-data"
-    >
-      <h4>Add Recipe</h4>
-      <div class="input-field">
-        <input
-          type="text"
-          name="recipeName"
-          placeholder="Recipe Name *"
-          required
-        />
-      </div>
-
-      <div class="input-field">
-        <textarea
-          id="textarea1"
-          class="materialize-textarea"
-          name="ingredients"
-          placeholder="Ingredients list separated by ; *"
-        ></textarea>
-      </div>
-
-      <div class="input-field col s12">
-        <textarea
-          id="textarea1"
-          class="materialize-textarea"
-          name="preparation"
-          placeholder="Preparation Steps separated with ; *"
-        ></textarea>
-      </div>
-      <div class="input-field">
-        <input
-          type="text"
-          name="additional"
-          placeholder="Additional Information"
-          required
-        />
-      </div>
-      <br />
-
-      <div class="upload-btn-wrapper">
-        <button class="upload-btn">Upload Recipe Picture</button>
-        <input
-          type="file"
-          name="imageFile"
-          accept="image/png, image/jpeg, image/jpg"
-        />
-      </div>
-      <br /><br />
-
-      <div class="center-align">
-        <button
-          class="btn waves-effect blue waves-light btn-large"
-          type="submit"
-          name="action"
+  <div class="row">
+    <div class="col s4">
+      <img class="add-page-image" src="/images/add-chef.jpg" alt="chef image" />
+    </div>
+    <div class="col s8">
+      <div class="form-style-5 add-page">
+        <form
+          action="/add"
+          method="POST"
+          autocomplete="off"
+          enctype="multipart/form-data"
         >
-          Add Recipe
-        </button>
+          <h4>Add Recipe</h4>
+          <div class="input-field">
+            <input
+              type="text"
+              name="recipeName"
+              placeholder="Recipe Name *"
+              required
+            />
+          </div>
+
+          <div class="input-field">
+            <textarea
+              id="textarea1"
+              class="materialize-textarea"
+              name="ingredients"
+              placeholder="Ingredients list separated by ; *"
+            ></textarea>
+          </div>
+
+          <div class="input-field col s12">
+            <textarea
+              id="textarea1"
+              class="materialize-textarea"
+              name="preparation"
+              placeholder="Preparation Steps separated with ; *"
+            ></textarea>
+          </div>
+          <div class="input-field">
+            <input
+              type="text"
+              name="additional"
+              placeholder="Additional Information"
+              required
+            />
+          </div>
+          <br />
+
+          <div class="upload-btn-wrapper">
+            <button class="upload-btn">Upload Recipe Picture</button>
+            <input
+              type="file"
+              name="imageFile"
+              accept="image/png, image/jpeg, image/jpg"
+            />
+          </div>
+          <br /><br />
+
+          <div class="center-align">
+            <button
+              class="btn waves-effect blue waves-light btn-large"
+              type="submit"
+              name="action"
+            >
+              Add Recipe
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
   <br />
 </section>

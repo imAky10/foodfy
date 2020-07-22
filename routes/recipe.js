@@ -1,14 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Recipe = require("../models/recipe");
+const Avatar = require("../models/avatar");
+
 const { ensureAuthenticated } = require("../config/auth");
 
 // Home page
 router.get("/", async (req, res) => {
   try {
-    const recipes = await Recipe.find({ status: "public" })
+    const recipes = await Recipe.find({
+      status: "public",
+    })
       .populate("user")
-      .sort({ createdAt: "desc" });
+      .sort({
+        createdAt: "desc",
+      });
 
     res.render("recipes/index", {
       recipes,
@@ -26,9 +32,14 @@ router.get("/about", (req, res) => {
 // My recipes
 router.get("/recipe-list", ensureAuthenticated, async (req, res) => {
   try {
-    const recipes = await Recipe.find({ user: req.user.id, status: "public" })
+    const recipes = await Recipe.find({
+      user: req.user.id,
+      status: "public",
+    })
       .populate("user")
-      .sort({ createdAt: "desc" });
+      .sort({
+        createdAt: "desc",
+      });
 
     res.render("recipes/recipe_list", {
       recipes,
@@ -39,18 +50,18 @@ router.get("/recipe-list", ensureAuthenticated, async (req, res) => {
 });
 
 // Recipe detail
-router.get("/recipes/:id", (req, res) => {
+router.get("/recipes/:id", async (req, res) => {
   var id = req.params.id;
-
-  Recipe.findById(id, (error, recipe) => {
-    if (error) {
-      console.log("Couldn't find recipe with that id:");
-    } else {
-      res.render("recipes/recipes", {
-        recipe,
-      });
-    }
+  const avatar = await Avatar.find({
+    user: req.user,
   }).populate("user");
+
+  const recipe = await Recipe.findById(id).populate("user");
+
+  res.render("recipes/recipes", {
+    recipe,
+    avatar,
+  });
 });
 
 // Add recipe page
@@ -140,15 +151,35 @@ router.get("/search", async (req, res) => {
   var data = req.query.searchRecipe;
   try {
     const recipes = await Recipe.find({
-      recipeName: { $regex: data, $options: "i" },
+      recipeName: {
+        $regex: data,
+        $options: "i",
+      },
     })
       .populate("user")
-      .sort({ createdAt: "desc" });
+      .sort({
+        createdAt: "desc",
+      });
     res.render("recipes/search", {
       recipes,
     });
   } catch (error) {
     console.log(err);
+  }
+});
+
+router.get("/recipes/user/:userId", ensureAuthenticated, async (req, res) => {
+  try {
+    const recipes = await Recipe.find({
+      user: req.params.userId,
+      status: "public",
+    }).populate("user");
+
+    res.render("recipes/recipe_list", {
+      recipes,
+    });
+  } catch (err) {
+    console.error(err);
   }
 });
 

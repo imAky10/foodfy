@@ -2,45 +2,56 @@
 
 <section>
   <br />
-  <div class="form-style-5">
-    <form action="/recipes/edit/<%= id %>" method="POST" autocomplete="off">
-      <h4>Edit Recipe</h4>
+  <div class="row">
+    <div class="col s7">
+      <div class="form-style-5 edit-page">
+        <form action="/recipes/edit/<%= id %>" method="POST" autocomplete="off">
+          <h4>Edit Recipe</h4>
 
-      <br />
+          <br />
 
-      <div class="input-field">
-        <input
-          id="recipeName"
-          name="recipeName"
-          value="<%= recipeName %>"
-          type="text"
-          class="validate"
-        />
-        <label for="recipeName">Recipe Name</label>
+          <div class="input-field">
+            <input
+              id="recipeName"
+              name="recipeName"
+              value="<%= recipeName %>"
+              type="text"
+              class="validate"
+            />
+            <label for="recipeName">Recipe Name</label>
+          </div>
+
+          <div class="input-field">
+            <input
+              id="additional"
+              name="additional"
+              value="<%= additional %>"
+              type="text"
+              class="validate"
+            />
+            <label for="additional">Additional Information</label>
+          </div>
+          <br />
+
+          <div class="center-align">
+            <button
+              class="btn waves-effect blue waves-light btn-large"
+              type="submit"
+              name="action"
+            >
+              Edit Recipe
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div class="input-field">
-        <input
-          id="additional"
-          name="additional"
-          value="<%= additional %>"
-          type="text"
-          class="validate"
-        />
-        <label for="additional">Additional Information</label>
-      </div>
-      <br />
-
-      <div class="center-align">
-        <button
-          class="btn waves-effect blue waves-light btn-large"
-          type="submit"
-          name="action"
-        >
-          Edit Recipe
-        </button>
-      </div>
-    </form>
+    </div>
+    <div class="col s4 offset-s1">
+      <img
+        class="add-edit-image"
+        src="/images/edit-chef.png"
+        alt="chef image"
+      />
+    </div>
   </div>
   <br />
 </section>

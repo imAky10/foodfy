@@ -2,8 +2,8 @@
 
 <section>
     <br /><br />
-
-    <div class="recipes">
+    <div class="row">
+    <div class="recipes col s8">
 
         <div class="recipes-card" id="<%= recipe._id %>">
             <div>
@@ -61,6 +61,46 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col s3 offset-s1">
+            <div class="card center-align">
+                <div class="card-content">
+                    <div>
+                        <h2 class="card-title title"><%= recipe.user.name %></h2>
+                    </div>
+                    <br />
+
+                    <div class="avatar">
+
+                        <% if(avatar.length>0) { %>
+                        <% avatar.map((myAvatar)=>{ %>
+
+                        <img src="/images/avatar/<%= myAvatar.avatarImage %>" alt=""
+                            class="circle responsive-img img-small" />
+
+                        <% }) } else { %>
+                        <img src="/images/profile.png" alt="" class="circle responsive-img img-small" />
+                        <% } %>
+
+                    </div>
+
+                </div>
+                <% if(user) { %>
+                <% if(user.id == recipe.user.id) { %>
+                <div class="card-action">
+                    <a href="/recipe-list">See all your recipes</a>
+                </div>
+                <% } else { %>
+                <div class="card-action">
+                    <a href="/recipes/user/<%= recipe.user._id %>">See all recipes of <%= recipe.user.name %></a>
+                </div>
+                <% } } %>
+
+            </div>
+        </div>
+    </div>
+            
 </section>
 
 <%- include('../partials/footer') %>
