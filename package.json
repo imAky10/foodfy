@@ -25,6 +25,9 @@
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
   },
+  "engines":{
+    "node":"14.15.1"
+  },
   "keywords": [],
   "author": "Amit",
   "license": "ISC"
