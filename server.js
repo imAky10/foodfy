@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const passport = require("passport");
 const flash = require("connect-flash");
@@ -28,12 +27,9 @@ mongoose.connect(
 
 // Middlewares
 app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
+  express.urlencoded());
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 // view engine
 app.set("view engine", "ejs");
